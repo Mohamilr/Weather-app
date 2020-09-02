@@ -1,6 +1,7 @@
 // declare all elements
 const weatherNav = document.querySelector('#weather-nav');
 const historyNav = document.querySelector('#history-nav')
+const back = document.querySelector('.back');
 const weatherDiv = document.querySelector('.weather');
 const historyDiv = document.querySelector('.history');
 const historyDetailsDiv = document.querySelector('.history-details');
@@ -22,10 +23,17 @@ historyNav.addEventListener('click', () => {
 
 
 details.addEventListener('click', () => {
-    // weatherDiv.style.display = 'none'
+    weatherNav.style.display = 'none';
     historyDetailsDiv.style.display = 'block';
-
+    back.style.display = 'block';
     historyDiv.style.display = 'none';
+});
+
+back.addEventListener('click', () => {
+    back.style.display = 'none';
+    weatherNav.style.display = 'block';
+    historyDetailsDiv.style.display = 'none';
+    historyDiv.style.display = 'block';
 })
 
 
