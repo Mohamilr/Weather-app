@@ -17,19 +17,26 @@
     <meta name="theme-color" content="#ffffff">
     <!--  -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <main>
         <section class="container">
             <section class="left-column">
-                <!-- <div></div> -->
+                <div class="top">
+                    <p class="current-weather"></p>
+                    <p class="city"></p>
+                    <p class="current-temp"></p>
+                </div>
                 <div class="bottom">
                     <div class="bottom-list">
                         <ul>
                             <li id="weather-nav">Weather</li>
                             <li class="back">Back</li>
                             <li id="history-nav">Search History</li>
+                            <li id="fetch">fetch</li>
                         </ul>
                     </div>
                     <!-- weather -->
@@ -40,8 +47,8 @@
                                 <span>12/12/12</span>
                             </p>
                             <p>
-                                <span>29 <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" width="30px"></span>
-                                <span>cloudy</span>
+                                <span><img src="http://openweathermap.org/img/wn/04d@2x.png" alt="weather icon" width="30%"></span>
+                                <span>cloudy 29</span>
                             </p>
                         </div>
                         <div class="content">
@@ -124,11 +131,12 @@
                     </div>
                 </div>
             </section>
-            <div class="right-column">ffkkfk</div>
         </section>
     </main>
+    <script src="./assets/js/time.js"></script>
     <script src="./assets/js/index.js"></script>
-    <script src="./assets/js/controlElements.js"></script>
+    <script  src="./assets/js/controlElements.js"></script>
+    <script  src="./assets/js/fetch.js"></script>
 </body>
 
 </html>
