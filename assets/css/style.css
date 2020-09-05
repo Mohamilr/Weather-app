@@ -50,15 +50,15 @@
     display: flex;
     list-style: none;
     justify-content: space-evenly;
-}
-
-.bottom-list > ul > li{
-    border-bottom: 2px solid red;
-    border-width: thin;
     cursor: pointer;
 }
 
-.weather .content :nth-child(2) > span {
+.active{
+    border-bottom: 2px solid red;
+    border-width: thin;
+}
+
+.content :nth-child(2) > span {
     text-align: center;
 }
 

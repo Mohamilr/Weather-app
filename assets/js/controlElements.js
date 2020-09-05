@@ -15,6 +15,8 @@ const historyDetailsDiv = document.querySelector('.history-details');
 weatherNav.addEventListener('click', () => {
     historyDiv.style.display = 'none';
     weatherDiv.style.display = 'block';
+    weatherNav.classList.add('active');
+    historyNav.classList.remove('active');
     historyDetailsDiv.style.display = 'none';
 
 })
@@ -22,6 +24,8 @@ weatherNav.addEventListener('click', () => {
 historyNav.addEventListener('click', () => {
     weatherDiv.style.display = 'none'
     historyDiv.style.display = 'block';
+    historyNav.classList.add('active');
+    weatherNav.classList.remove('active');
     historyDetailsDiv.style.display = 'none';
 });
 
@@ -35,19 +39,7 @@ back.addEventListener('click', () => {
 
 
 // display first 12 hours from search time
-function twelveHours(firstTwelve, action) {
-
-    switch (action) {
-        case 'weather-div':
-            action = weatherDiv;
-            break;
-        case 'history-details-div':
-            action = historyDetailsDiv;
-            break;
-        default:
-            weatherDiv;
-    };
-
+function twelveHours(firstTwelve) {
     firstTwelve.forEach(hourly => {
 
         const url = `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
@@ -55,7 +47,7 @@ function twelveHours(firstTwelve, action) {
         // day and date
         const dateTime = dateFormat(hourly.dt);
 
-        action.innerHTML += `
+        weatherDiv.innerHTML += `
             <div class="content">
                 <p>
                     <span>${dateTime.time}</span>
@@ -67,18 +59,41 @@ function twelveHours(firstTwelve, action) {
                 </p>
             </div>
         `
-
     })
 }
 
 
-const fetchD = document.querySelector('#fetch');
+// for history details
+function singleDetail(history, id) {
+    const singleData = history.filter(data => data.id == id)
+    singleData[0].firstTwelve.forEach(hourly => {
+
+        const url = `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
+        const temp = Math.floor(hourly.temp);
+        // day and date
+        const dateTime = dateFormat(hourly.dt);
+
+        historyDetailsDiv.innerHTML += `
+                <div class="content">
+                    <p>
+                        <span>${dateTime.time}</span>
+                        <span>${dateTime.date}</span>
+                    </p>
+                    <p>
+                        <span><img src=${url} alt="weather icon" width="30%"></span>
+                        <span>${hourly.weather[0].description} ${temp}°</span>
+                    </p>
+                </div>
+            `
+    })
+}
+
 
 // local storage
 let local = localStorage.getItem('data');
 let oldLocal = JSON.parse(local);
 
-fetchD.addEventListener('click', async () => {
+const getWeather = async () => {
     try {
         const response = await fetch('https://api.openweathermap.org/data/2.5/onecall?lat=40.730610&lon=-73.935242&units=metric&appid=45bb604b9ab63b565878da914e9f5edc&exclude=minutely,daily')
         const data = await response.json();
@@ -109,11 +124,7 @@ fetchD.addEventListener('click', async () => {
 
         storage.push(store);
         // call first 12 fuction
-        twelveHours(firstTwelve, 'weather-div');
-
-        console.log('fi', firstTwelve)
-        console.log(data)
-
+        twelveHours(firstTwelve);
 
         // update localstorage content
         // let local = localStorage.getItem('data');
@@ -134,8 +145,10 @@ fetchD.addEventListener('click', async () => {
         console.error(e)
     }
 
-})
+};
 
+// Get weather data on page load
+getWeather()
 // format date
 function dateFormat(unix) {
     const date = new Date(unix * 1000);
@@ -185,7 +198,7 @@ function weatherHistory() {
     if (history !== null) {
         history.forEach(day => {
             historyDiv.innerHTML += `
-        <div id="details" class="content">
+        <div id="details" class="content" onclick=dataDetails(${day.id})>
             <p>
                 <span>${day.currentTime.time}</span>
                 <span>${day.currentTime.date}</span>
@@ -199,30 +212,21 @@ function weatherHistory() {
         })
     }
 
-    const details = document.querySelectorAll('#details');
-
-    details.forEach(detail => {
-        detail.addEventListener('click', () => {
-            weatherNav.style.display = 'none';
-            historyDetailsDiv.style.display = 'block';
-            back.style.display = 'block';
-            historyDiv.style.display = 'none';
-            dataDetails();
-        });
-
-    })
-
     console.log('jjj', history)
 }
 
 weatherHistory();
 
 
-function dataDetails() {
-    history.forEach(detail => {
-        // call first 12 fuction
-        twelveHours(detail.firstTwelve, 'history-details-div');
-    })
+function dataDetails(id) {
+    // divs
+    weatherNav.style.display = 'none';
+    historyDetailsDiv.style.display = 'block';
+    back.style.display = 'block';
+    historyDiv.style.display = 'none';
+
+    //
+    singleDetail(history, id);
 }
 
 
