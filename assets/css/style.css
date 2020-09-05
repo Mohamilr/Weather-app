@@ -88,6 +88,10 @@
     border-bottom: 1px solid #aaa;
 }
 
+.history .content p > span {
+    margin: 6px;
+}
+
 .history-details {
     display: none;
 }
