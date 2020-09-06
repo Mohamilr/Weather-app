@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- google font -->
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body>
@@ -26,9 +29,13 @@
         <section class="container">
             <section class="left-column">
                 <div class="top">
+                    <div class="search-div">
+                        <input type="text" placeholder="Location" class="search-input" onblur=latLng(this.value)>
+                        <span class="search-btn" onclick=getWeather()><i class="fas fa-search-location"></i></span>
+                    </div>
                     <p class="current-weather"></p>
                     <p class="city"></p>
-                    <img class="img" src="" alt="">
+                    <img class="img" src="" alt="weather-image" width="30%">
                     <p class="current-temp"></p>
                 </div>
                 <div class="bottom">
