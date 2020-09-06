@@ -1,4 +1,7 @@
 // declare all elements
+// search input
+const input = document.querySelector('.search-input');
+//
 const currentWeather = document.querySelector('.current-weather');
 const city = document.querySelector('.city');
 const currentTemp = document.querySelector('.current-temp');
@@ -38,6 +41,11 @@ back.addEventListener('click', () => {
 });
 
 
+// latitude and longitude for search location.
+let lat;
+let lng
+console.log(lat)
+
 // display first 12 hours from search time
 function twelveHours(firstTwelve) {
     firstTwelve.forEach(hourly => {
@@ -65,13 +73,15 @@ function twelveHours(firstTwelve) {
 
 // for history details
 function singleDetail(history, id) {
-    const singleData = history.filter(data => data.id == id)
+    const singleData = history.filter(data => data.id == id);
+
     singleData[0].firstTwelve.forEach(hourly => {
 
         const url = `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
         const temp = Math.floor(hourly.temp);
         // day and date
         const dateTime = dateFormat(hourly.dt);
+
 
         historyDetailsDiv.innerHTML += `
                 <div class="content">
@@ -95,7 +105,11 @@ let oldLocal = JSON.parse(local);
 
 const getWeather = async () => {
     try {
-        const response = await fetch('https://api.openweathermap.org/data/2.5/onecall?lat=40.730610&lon=-73.935242&units=metric&appid=45bb604b9ab63b565878da914e9f5edc&exclude=minutely,daily')
+        if (lat === undefined && lng === undefined) {
+            lat = 40.730610;
+            lng = -73.935242;
+        }
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=45bb604b9ab63b565878da914e9f5edc&exclude=minutely,daily`)
         const data = await response.json();
         const firstTwelve = data.hourly.slice(1, 13);
 
@@ -148,7 +162,8 @@ const getWeather = async () => {
 };
 
 // Get weather data on page load
-getWeather()
+getWeather();
+
 // format date
 function dateFormat(unix) {
     const date = new Date(unix * 1000);
@@ -211,8 +226,6 @@ function weatherHistory() {
         `
         })
     }
-
-    console.log('jjj', history)
 }
 
 weatherHistory();
@@ -230,3 +243,46 @@ function dataDetails(id) {
 }
 
 
+
+
+// GET A LOCATION LATITUDE AND LONGITUDE
+async function latLng(location) {
+    if (!location) {
+        return undefined
+    }
+
+    try {
+        const response = await fetch(`https://google-maps-geocoding.p.rapidapi.com/geocode/json?language=en&address=${location}`, {
+            method: 'GET',
+            headers: {
+                "x-rapidapi-host": "google-maps-geocoding.p.rapidapi.com",
+                "x-rapidapi-key": "feb5a7b223msh76b7a43e38446bfp1eb31ajsne300800cf916"
+            }
+        });
+
+        const data = await response.json()
+        if (data.length < 1) {
+            return console.log('not found')
+        }
+
+
+        lat = data.results[0].geometry.location.lat,
+            lng = data.results[0].geometry.location.lng
+        console.log('lat', lat);
+        console.log('lng', lng)
+    }
+    catch (e) {
+        console.error(e);
+    };
+}
+
+// debounce
+// function debounce(func, wait = 10000) {
+//     let timeout;
+//     return function(...args) {
+//       clearTimeout(timeout);
+//       timeout = setTimeout(() => {
+//         func.apply(this, args);
+//       }, wait);
+//     };
+//   }
