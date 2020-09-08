@@ -34,7 +34,6 @@
 
 .search-btn {
     cursor: pointer;
-    /* width: 30px; */
 }
 
 .fa-search-location {
@@ -88,17 +87,28 @@
 }
 
 .back {
+    font-size: 1em;
+    color: blue;
     display: none;
+}
+
+.weather .loader {
+    text-align: center;
+    margin: 2em;
+    font-size: 3em;
 }
 
 .content {
     display: flex;
     justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: 1px 2px 2px #aaa;
 }
 
 .content > p {
     display: flex;
     flex-direction: column;
+    padding: 0 4px;
 }
 
 .content  p:nth-child(1) > span {
@@ -109,8 +119,14 @@
     display: none;
 }
 
+.history .no-data {
+    text-align: center;
+    margin: 2em;
+    display: none;
+}
+
 .history .content {
-    border-bottom: 1px solid #aaa;
+    cursor: pointer;
 }
 
 .history .content p > span {
