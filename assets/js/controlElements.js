@@ -11,7 +11,11 @@ const weatherNav = document.querySelector('#weather-nav');
 const historyNav = document.querySelector('#history-nav')
 const back = document.querySelector('.back');
 const weatherDiv = document.querySelector('.weather');
+// loader
+const loader = document.querySelector('.loader');
 const historyDiv = document.querySelector('.history');
+// nodata
+const noData = document.querySelector('.no-data'); 
 const historyDetailsDiv = document.querySelector('.history-details');
 
 
@@ -44,10 +48,12 @@ back.addEventListener('click', () => {
 // latitude and longitude for search location.
 let lat;
 let lng
-console.log(lat)
 
 // display first 12 hours from search time
 function twelveHours(firstTwelve) {
+    // set loader to none 
+    loader.style.display = 'none';
+    
     firstTwelve.forEach(hourly => {
 
         const url = `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
@@ -55,6 +61,8 @@ function twelveHours(firstTwelve) {
         // day and date
         const dateTime = dateFormat(hourly.dt);
 
+        
+        // loader.style.display = 'none';
         weatherDiv.innerHTML += `
             <div class="content">
                 <p>
@@ -171,7 +179,8 @@ function dateFormat(unix) {
     let minute = date.getUTCMinutes();
     const second = date.getUTCSeconds();
     const year = date.getUTCFullYear();
-    let month = date.getUTCMonth();
+    let month = date.getMonth();
+    month += 1;
     let day = date.getUTCDate();
 
     if (month < 10) {
@@ -226,6 +235,8 @@ function weatherHistory() {
         `
         })
     }
+
+    noData.style.display = 'block'
 }
 
 weatherHistory();

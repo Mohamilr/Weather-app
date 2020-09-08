@@ -42,15 +42,17 @@
                     <div class="bottom-list">
                         <ul>
                             <li id="weather-nav" class="active">Weather</li>
-                            <li class="back">Back</li>
+                            <li class="back"><i class="fas fa-arrow-left"></i></li>
                             <li id="history-nav">Search History</li>
                         </ul>
                     </div>
                     <!-- weather -->
                     <div class="weather">
+                        <p class="loader"><i class="fas fa-spinner fa-pulse"></i></p>
                     </div>
                     <!-- history -->
                     <div class="history">
+                        <p class="no-data">no data</p>
                     </div>
                     <!-- history details -->
                     <div class="history-details">
@@ -59,10 +61,26 @@
             </section>
         </section>
     </main>
+    <script>
+        if (navigator.serviceWorker) {
+            try {
+                window.addEventListener('load', async () => {
+                    const register = await navigator.serviceWorker.register('/assets/js/index.sw.js');
+                    console.log('registration', register.scope)
+                    console.log('register')
+                });
+            }
+            catch (e) {
+                console.error(e);
+            }
+
+        }
+    </script>
     <script src="./assets/js/time.js"></script>
-    <script src="./assets/js/index.js"></script>
-    <script  src="./assets/js/controlElements.js"></script>
-    <script  src="./assets/js/fetch.js"></script>
+    <!-- <script src="./assets/js/index.js"></script> -->
+    <script src="./assets/js/controlElements.js"></script>
+    <script src="./assets/js/fetch.js"></script>
+    <script src="./assets/js/index.sw.js"></script>
 </body>
 
 </html>
