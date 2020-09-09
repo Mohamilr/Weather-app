@@ -56,7 +56,7 @@ function twelveHours(firstTwelve) {
     
     firstTwelve.forEach(hourly => {
 
-        const url = `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
+        const url = `https://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
         const temp = Math.floor(hourly.temp);
         // day and date
         const dateTime = dateFormat(hourly.dt);
@@ -126,7 +126,7 @@ const getWeather = async () => {
         currentWeather.textContent = caps + data.current.weather[0].description.slice(1)
         city.textContent = data.timezone;
         currentTemp.textContent = `${Math.floor(data.current.temp)}°`;
-        currentWeatherImg.src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
+        currentWeatherImg.src = `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
         let id = 1;
         // local storage data
 
