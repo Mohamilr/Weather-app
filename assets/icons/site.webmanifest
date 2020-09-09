@@ -12,10 +12,24 @@
             "src": "/assets/icons/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "/assets/icons/maskable_icon.png",
+            "sizes": "196x196",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "orientation": "any",
-    "display": "standalone"
+    "display": "standalone",
+    "dir": "ltr",
+    "lang": "en-US",
+    "description": "'Smash It' outdoor events will be hosted in NYC in the coming months. This weather app information will be a determinant if the event will hold or not.",
+    "scope": "/",
+    "serviceworker": {
+        "src": "/assets/js/index.sw.js",
+        "scope": "/assets/js"
+    }
 }
