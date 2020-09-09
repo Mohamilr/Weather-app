@@ -2,29 +2,26 @@ const CACHE_NAME = 'APP_CACHE_V1'
 
 const cacheItems = [
     // global
-    '../index.html',
-    '../css/style.css',
+    './index.html',
+    './css/style.css',
     // /icons
-    '../icons/android-chrome-192x192.png',
-    '../icons/android-chrome-512x512.png',
-    '../icons/apple-touch-icon.png',
-    '../icons/browserconfig.xml',
-    '../icons/favicon-16x16.png',
-    '../icons/favicon-32x32.png',
-    '../icons/favicon.ico',
-    '../icons/maskable_icon.png',
-    '../icons/mstile-150x150.png',
-    '../icons/safari-pinned-tab.svg',
-    '../icons/site.webmanifest',
+    './icons/android-chrome-192x192.png',
+    './icons/android-chrome-512x512.png',
+    './icons/apple-touch-icon.png',
+    './icons/browserconfig.xml',
+    './icons/favicon-16x16.png',
+    './icons/favicon-32x32.png',
+    './icons/favicon.ico',
+    './icons/maskable_icon.png',
+    './icons/mstile-150x150.png',
+    './icons/safari-pinned-tab.svg',
+    './icons/site.webmanifest',
     // /js
-    './controlElements.js',
-    // '',
-    // '',
-    // '',
-    // '',
-    // '',
-    // ''
-    // root
+    './js/controlElements.js',
+    './index.sw.js',
+    // images
+    './empty.png',
+    './newyork.png',
 ]
 
 // install service worker
@@ -46,7 +43,7 @@ self.addEventListener('fetch', fetchEvent => {
         let response;
 
         response = await caches.match(request);
-        if (response && response.status === 200 || response.status === 304) {
+        if (response && response.status === 200) {
             console.log('available there');
             return response;
         }
