@@ -1,7 +1,7 @@
 {
     "name": "weather app",
     "short_name": "weather app",
-    "start_url": "/",
+    "start_url": "/assets/",
     "icons": [
         {
             "src": "/assets/icons/android-chrome-192x192.png",
@@ -15,7 +15,7 @@
         },
         {
             "src": "/assets/icons/maskable_icon.png",
-            "sizes": "196x196",
+            "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         }
@@ -29,7 +29,7 @@
     "description": "'Smash It' outdoor events will be hosted in NYC in the coming months. This weather app information will be a determinant if the event will hold or not.",
     "scope": "/",
     "serviceworker": {
-        "src": "/assets/js/index.sw.js",
-        "scope": "/assets/js"
+        "src": "/assets/index.sw.js",
+        "scope": "/assets"
     }
 }

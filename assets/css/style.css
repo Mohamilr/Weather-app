@@ -4,7 +4,7 @@
 }
 
 body {
-    background: url('https://res.cloudinary.com/project-s/image/upload/v1599655203/newyork_2_tduzoj.jpg') no-repeat center center fixed;
+    background: url('/assets/newyork.jpg') no-repeat center center fixed;
     background-size: cover; 
 }
 
@@ -128,8 +128,8 @@ body {
 }
 
 .history .no-data {
-    text-align: center;
-    margin: 2em;
+    margin: 0 auto;
+    width: 20em;
     display: none;
 }
 

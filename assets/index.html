@@ -37,7 +37,7 @@
                     </div>
                     <p class="current-weather"></p>
                     <p class="city"></p>
-                    <img class="img" src="" alt="weather-image" width="30%">
+                    <img class="img" src="" alt="weather-icon" width="30%">
                     <p class="current-temp"></p>
                 </div>
                 <div class="bottom">
@@ -54,7 +54,7 @@
                     </div>
                     <!-- history -->
                     <div class="history">
-                        <p class="no-data">no data</p>
+                        <img class="no-data" src="./empty.png" alt="no data">
                     </div>
                     <!-- history details -->
                     <div class="history-details">
@@ -67,7 +67,7 @@
         if (navigator.serviceWorker) {
             try {
                 window.addEventListener('load', async () => {
-                    const register = await navigator.serviceWorker.register('./js/index.sw.js');
+                    const register = await navigator.serviceWorker.register('./index.sw.js');
                     console.log('registration', register.scope)
                     console.log('register')
                 });
@@ -78,11 +78,8 @@
 
         }
     </script>
-    <script src="./js/time.js"></script>
-    <!-- <script src="./assets/js/index.js"></script> -->
     <script src="./js/controlElements.js"></script>
-    <script src="./js/fetch.js"></script>
-    <script src="./js/index.sw.js"></script>
+    <script src="./index.sw.js"></script>
 </body>
 
 </html>
