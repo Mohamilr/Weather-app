@@ -2,7 +2,7 @@ const CACHE_NAME = 'APP_CACHE_V1'
 
 const cacheItems = [
     // global
-    '../../index.html',
+    '../index.html',
     '../css/style.css',
     // /icons
     '../icons/android-chrome-192x192.png',
@@ -12,6 +12,7 @@ const cacheItems = [
     '../icons/favicon-16x16.png',
     '../icons/favicon-32x32.png',
     '../icons/favicon.ico',
+    '../icons/maskable_icon.png',
     '../icons/mstile-150x150.png',
     '../icons/safari-pinned-tab.svg',
     '../icons/site.webmanifest',
@@ -91,14 +92,14 @@ self.addEventListener('activate', activator => {
 });
 
 
-async function ss () {
-    const cache = await caches.open(CACHE_NAME);
-    const keys = await cache.keys();
+// async function ss () {
+//     const cache = await caches.open(CACHE_NAME);
+//     const keys = await cache.keys();
 
-    keys.forEach(key => {
+//     keys.forEach(key => {
         
-    })
+//     })
 
-    console.log(keys)
-}
-ss();
+//     console.log(keys)
+// }
+// ss();
