@@ -91,14 +91,14 @@ self.addEventListener('activate', activator => {
 });
 
 
-async function ss () {
-    const cache = await caches.open(CACHE_NAME);
-    const keys = await cache.keys();
+// async function ss () {
+//     const cache = await caches.open(CACHE_NAME);
+//     const keys = await cache.keys();
 
-    keys.forEach(key => {
+//     keys.forEach(key => {
         
-    })
+//     })
 
-    console.log(keys)
-}
-ss();
+//     console.log(keys)
+// }
+// ss();

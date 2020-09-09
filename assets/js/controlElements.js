@@ -1,3 +1,5 @@
+document.writeln("<script type='text/javascript' src='./time.js'></script>");
+
 // declare all elements
 // search input
 const input = document.querySelector('.search-input');
@@ -111,109 +113,7 @@ function singleDetail(history, id) {
 let local = localStorage.getItem('data');
 let oldLocal = JSON.parse(local);
 
-const getWeather = async () => {
-    try {
-        if (lat === undefined && lng === undefined) {
-            lat = 40.730610;
-            lng = -73.935242;
-        }
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=45bb604b9ab63b565878da914e9f5edc&exclude=minutely,daily`)
-        const data = await response.json();
-        const firstTwelve = data.hourly.slice(1, 13);
 
-        // current Weather
-        let caps = data.current.weather[0].description.charAt(0).toUpperCase();
-        currentWeather.textContent = caps + data.current.weather[0].description.slice(1)
-        city.textContent = data.timezone;
-        currentTemp.textContent = `${Math.floor(data.current.temp)}°`;
-        currentWeatherImg.src = `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
-        let id = 1;
-        // local storage data
-
-        const storage = [];
-        // local storage save
-        if (oldLocal !== null) {
-            id = oldLocal.length + 1
-        }
-        const store = {
-            id,
-            currentWeather: caps + data.current.weather[0].description.slice(1),
-            city: data.timezone,
-            currentTime: dateFormat(data.current.dt),
-            currentTemp: `${Math.floor(data.current.temp)}°`,
-            firstTwelve
-        }
-
-        storage.push(store);
-        // call first 12 fuction
-        twelveHours(firstTwelve);
-
-        // update localstorage content
-        // let local = localStorage.getItem('data');
-
-        if (local === null) {
-            localStorage.setItem('data', JSON.stringify(storage))
-        }
-        else {
-            // let oldLocal = JSON.parse(local);
-            let newLocal = oldLocal;
-            newLocal.push(store);
-            localStorage.setItem('data', JSON.stringify(newLocal))
-        }
-
-
-    }
-    catch (e) {
-        console.error(e)
-    }
-
-};
-
-// Get weather data on page load
-getWeather();
-
-// format date
-function dateFormat(unix) {
-    const date = new Date(unix * 1000);
-    let hour = date.getUTCHours();
-    let minute = date.getUTCMinutes();
-    const second = date.getUTCSeconds();
-    const year = date.getUTCFullYear();
-    let month = date.getMonth();
-    month += 1;
-    let day = date.getUTCDate();
-
-    if (month < 10) {
-        month = `0${month}`
-    }
-
-    if (day < 10) {
-        day = `0${day}`
-    }
-
-    if (hour < 10) {
-        hour = `0${hour}`
-    }
-
-    if (minute < 10) {
-        minute = `0${minute}`
-    }
-
-    let time;
-    if (hour <= 12) {
-        time = `${hour}:${minute} am`
-
-    }
-    else {
-        time = `${hour}:${minute} pm`
-    }
-
-    const dateTime = {
-        date: `${year}-${month}-${day}`,
-        time: time
-    }
-    return dateTime;
-}
 
 let dataHistory = localStorage.getItem('data');
 let history = JSON.parse(dataHistory);
