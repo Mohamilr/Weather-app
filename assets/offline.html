@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="'Smash It' outdoor events will be hosted in NYC in the coming months. This weather app information will be a determinant if the event will hold or not.">
+    <title>Weather-app - offline page</title>
+    <!-- web app manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+    <link rel="manifest" href="./icons/site.webmanifest">
+    <link rel="mask-icon" href="./icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="./icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-config" content="./icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!--  -->
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body>
+    <main>
+        <section class="container">
+            <section class="left-column">
+                <div class="bottom">
+                    <div class="bottom-list">
+                        <ul>
+                            <li class="back"><i class="fas fa-arrow-left"></i></li>
+                            <li id="history-nav" class="active">Search History</li>
+                        </ul>
+                    </div>
+                    <!-- history -->
+                    <div class="history">
+                        <img class="no-data" src="./empty.png" alt="no data">
+                    </div>
+                    <!-- history details -->
+                    <div class="history-details">
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script src="./js/offline.js"></script>
+</body>
+
+</html>

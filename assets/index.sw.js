@@ -22,6 +22,9 @@ const cacheItems = [
     // images
     './empty.png',
     './newyork.png',
+    // '',
+    // ''
+    // root
 ]
 
 // install service worker
