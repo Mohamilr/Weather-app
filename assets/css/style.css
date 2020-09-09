@@ -4,7 +4,7 @@
 }
 
 body {
-    background: url('/assets/newyork.jpg') no-repeat center center fixed;
+    background: url('/assets/images/newyork.jpg') no-repeat center center fixed;
     background-size: cover; 
 }
 
@@ -143,6 +143,18 @@ body {
 
 .history-details {
     display: none;
+}
+
+/* 404 page style */
+.not-found {
+    margin: 1em auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.not-found > img {
+    width: 50em;
 }
 
 @media only screen and (max-width: 1024px) {
