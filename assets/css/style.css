@@ -2,13 +2,19 @@
     box-sizing: border-box;
     font-family: 'Kumbh Sans', sans-serif;
 }
+
+body {
+    background: url('https://res.cloudinary.com/project-s/image/upload/v1599655203/newyork_2_tduzoj.jpg') no-repeat center center fixed;
+    background-size: cover; 
+}
+
 .container {
     margin: 2em auto;
     width: 40%;
     border: 1px solid #fff;
     border-radius: 20px;
-    background-color: #fff;
     color: #737373;
+    background-color: #88d6d8;
     box-shadow: 1px 2px 2px #aaa;
 }
 
@@ -18,6 +24,7 @@
 
 .search-div {
     display: flex;
+    margin: 2em;
     border-radius: 20px;
     box-shadow: 1px 2px 2px #aaa;
     height: 3em;
@@ -25,11 +32,12 @@
 
 .search-input {
     border: 2px solid #fff;
-    padding: 8px;
+    padding: 10px;
     border-radius: 20px;
     margin-right: 3px;
     width: 100%;
-    font-size: 20px;
+    background-color: #bce3db;
+    font-size: 15px;
 }
 
 .search-btn {
@@ -40,7 +48,7 @@
     font-size: 2em;
     text-align: center;
     padding: 10px;
-    color: hotpink;
+    color: #fff;
 }
 
 .bottom {
@@ -52,6 +60,7 @@
     box-shadow: 1px 2px 2px #aaa;
     max-height: 30em;
     overflow-y: scroll;
+    background-color: #bce3db;
 }
 
 .bottom::-webkit-scrollbar {
@@ -59,15 +68,15 @@
 }
 
 .bottom::-webkit-scrollbar-track {
-    background: green;
+    background: #fff;
 }
 
 .bottom::-webkit-scrollbar-thumb {
-    background: red;
+    background: #bce3db;
 }
 
 .bottom::-webkit-scrollbar-thumb:hover {
-    background:blue;
+    background:#bce3db;
 }
 
 .bottom-list > ul{
@@ -78,8 +87,7 @@
 }
 
 .active{
-    border-bottom: 2px solid red;
-    border-width: thin;
+    border-bottom: 2px solid #ec6e4c;
 }
 
 .content :nth-child(2) > span {
@@ -87,8 +95,8 @@
 }
 
 .back {
-    font-size: 1em;
-    color: blue;
+    font-size: 1.5em;
+    color: #737373;
     display: none;
 }
 
@@ -145,5 +153,11 @@
 
     .bottom {
         max-height: 100vh;
+    }
+
+    .bottom-list > ul{
+        display: flex;
+        justify-content: space-around;
+        /* margin: 3px; */
     }
 }
