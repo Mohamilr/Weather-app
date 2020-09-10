@@ -19,7 +19,7 @@ Smash It outdoor events will be hosted in NYC in the coming months. This weather
 * ```Firebase Hosting```
 
 ### visit app on
-[covid-19-health](https://weather-app-8c536.web.app/)
+[weather-app](https://weather-app-8c536.web.app/)
 
 ### Author
 Mohammed Ibrahim :nerd_face:
