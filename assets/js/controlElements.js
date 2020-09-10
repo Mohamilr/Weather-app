@@ -144,7 +144,6 @@ const getWeather = async () => {
         currentTemp.textContent = `${Math.floor(data.current.temp)}°`;
         currentWeatherImg.src = `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
         // call first 12 fuction
-        // console.log('twelveHours', firstTwelve)
         twelveHours(firstTwelve);
         
         // local storage data
@@ -279,8 +278,8 @@ async function latLng() {
 
         lat = data.results[0].geometry.location.lat,
         lng = data.results[0].geometry.location.lng
-        console.log('lat', lat);
-        console.log('lng', lng)
+        // console.log('lat', lat);
+        // console.log('lng', lng)
     }
     catch (e) {
         console.error(e);
@@ -288,7 +287,7 @@ async function latLng() {
 }
 
 // get weather by loaction trigger
-input.addEventListener('input', debounce(latLng, 500));
+input.addEventListener('input', debounce(latLng, 1000));
 
 // debounce
 function debounce(func, wait) {
@@ -296,7 +295,6 @@ function debounce(func, wait) {
     return function(...args) {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
-          console.log(this)
         func.apply(this, args);
       }, wait);
     };

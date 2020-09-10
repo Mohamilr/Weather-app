@@ -50,14 +50,14 @@ self.addEventListener('fetch', fetchEvent => {
 
         response = await caches.match(request);
         if (response && response.status === 200) {
-            console.log('available there');
+            // console.log('available there');
             return response;
         }
 
         try {
             response = await fetch(request);
             if (response && response.status === 404) {
-                console.log('not available there');
+                // console.log('not available there');
                 return caches.match('/404.html');
             }
         }
