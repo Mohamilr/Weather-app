@@ -147,14 +147,24 @@ body {
 
 /* 404 page style */
 .not-found {
-    margin: 1em auto;
+    margin: 0em auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.not-found > img {
-    width: 50em;
+.not-found > div {
+    margin: 2em auto;
+    
+}
+
+.not-found  div > img {
+    width: 30em;
+}
+
+.not-found > a {
+    text-align: center;
+    margin: 2em;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -170,6 +180,16 @@ body {
     .bottom-list > ul{
         display: flex;
         justify-content: space-around;
-        /* margin: 3px; */
     }
+
+/* 404 page style */
+.not-found > div {
+    margin: 0em auto; 
+}
+
+.not-found  div > img {
+    margin: 6em 0;
+    width: 20em;
+}
+
 }
