@@ -44,134 +44,6 @@ back.addEventListener('click', () => {
     historyDiv.style.display = 'block';
 });
 
-
-// latitude and longitude for search location.
-let lat;
-let lng
-
-// display first 12 hours from search time
-function twelveHours(firstTwelve) {
-    // set loader to none 
-    loader.style.display = 'none';
-    
-    firstTwelve.forEach(hourly => {
-
-        const url = `https://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
-        const temp = Math.floor(hourly.temp);
-        // day and date
-        const dateTime = dateFormat(hourly.dt);
-
-        
-        // loader.style.display = 'none';
-        weatherDiv.innerHTML += `
-            <div class="content">
-                <p>
-                    <span>${dateTime.time}</span>
-                    <span>${dateTime.date}</span>
-                </p>
-                <p>
-                    <span><img src=${url} alt="weather icon" width="30%"></span>
-                    <span>${hourly.weather[0].description} ${temp}°</span>
-                </p>
-            </div>
-        `
-    })
-}
-
-
-// for history details
-function singleDetail(history, id) {
-    const singleData = history.filter(data => data.id == id);
-
-    singleData[0].firstTwelve.forEach(hourly => {
-
-        const url = `https://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
-        const temp = Math.floor(hourly.temp);
-        // day and date
-        const dateTime = dateFormat(hourly.dt);
-
-
-        historyDetailsDiv.innerHTML += `
-                <div class="content">
-                    <p>
-                        <span>${dateTime.time}</span>
-                        <span>${dateTime.date}</span>
-                    </p>
-                    <p>
-                        <span><img src=${url} alt="weather icon" width="30%"></span>
-                        <span>${hourly.weather[0].description} ${temp}°</span>
-                    </p>
-                </div>
-            `
-    })
-}
-
-
-// local storage
-let local = localStorage.getItem('data');
-let oldLocal = JSON.parse(local);
-
-const getWeather = async () => {
-    try {
-        if (lat === undefined && lng === undefined) {
-            lat = 40.730610;
-            lng = -73.935242;
-        }
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=45bb604b9ab63b565878da914e9f5edc&exclude=minutely,daily`)
-        const data = await response.json();
-        const firstTwelve = data.hourly.slice(1, 13);
-
-        // current Weather
-        let caps = data.current.weather[0].description.charAt(0).toUpperCase();
-        currentWeather.textContent = caps + data.current.weather[0].description.slice(1)
-        city.textContent = data.timezone;
-        currentTemp.textContent = `${Math.floor(data.current.temp)}°`;
-        currentWeatherImg.src = `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
-        let id = 1;
-        // local storage data
-
-        const storage = [];
-        // local storage save
-        if (oldLocal !== null) {
-            id = oldLocal.length + 1
-        }
-        const store = {
-            id,
-            currentWeather: caps + data.current.weather[0].description.slice(1),
-            city: data.timezone,
-            currentTime: dateFormat(data.current.dt),
-            currentTemp: `${Math.floor(data.current.temp)}°`,
-            firstTwelve
-        }
-
-        storage.push(store);
-        // call first 12 fuction
-        twelveHours(firstTwelve);
-
-        // update localstorage content
-        // let local = localStorage.getItem('data');
-
-        if (local === null) {
-            localStorage.setItem('data', JSON.stringify(storage))
-        }
-        else {
-            // let oldLocal = JSON.parse(local);
-            let newLocal = oldLocal;
-            newLocal.push(store);
-            localStorage.setItem('data', JSON.stringify(newLocal))
-        }
-
-
-    }
-    catch (e) {
-        console.error(e)
-    }
-
-};
-
-// Get weather data on page load
-getWeather();
-
 // format date
 function dateFormat(unix) {
     const date = new Date(unix * 1000);
@@ -215,6 +87,111 @@ function dateFormat(unix) {
     return dateTime;
 }
 
+// latitude and longitude for search location.
+let lat;
+let lng
+
+// display first 12 hours from search time
+function twelveHours(firstTwelve) {
+    // set loader to none 
+    loader.style.display = 'none';
+    
+    firstTwelve.forEach(hourly => {
+
+        const url = `https://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
+        const temp = Math.floor(hourly.temp);
+        // day and date
+        const dateTime = dateFormat(hourly.dt);
+
+        
+        // loader.style.display = 'none';
+        weatherDiv.innerHTML += `
+            <div class="content">
+                <p>
+                    <span>${dateTime.time}</span>
+                    <span>${dateTime.date}</span>
+                </p>
+                <p>
+                    <span><img src=${url} alt="weather icon" width="30%"></span>
+                    <span>${hourly.weather[0].description} ${temp}°</span>
+                </p>
+            </div>
+        `
+    })
+}
+
+
+// local storage
+let local = localStorage.getItem('data');
+let oldLocal = JSON.parse(local);
+
+
+const getWeather = async () => {
+    // weatherDiv.innerHTML += `<p class="loader"><i class="fas fa-spinner fa-pulse"></i></p>`
+    try {
+        if (lat === undefined && lng === undefined) {
+            lat = 40.730610;
+            lng = -73.935242;
+        }
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lng}&units=metric&appid=45bb604b9ab63b565878da914e9f5edc&exclude=minutely,daily`)
+        const data = await response.json();
+        const firstTwelve = data.hourly.slice(1, 13);
+
+        // current Weather
+        let caps = data.current.weather[0].description.charAt(0).toUpperCase();
+        currentWeather.textContent = caps + data.current.weather[0].description.slice(1)
+        city.textContent = data.timezone;
+        currentTemp.textContent = `${Math.floor(data.current.temp)}°`;
+        currentWeatherImg.src = `https://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`
+        // call first 12 fuction
+        // console.log('twelveHours', firstTwelve)
+        twelveHours(firstTwelve);
+        
+        // local storage data
+        let id = 1;
+
+        const storage = [];
+        // local storage save
+        if (oldLocal !== null) {
+            id = oldLocal.length + 1
+        }
+        const store = {
+            id,
+            currentWeather: caps + data.current.weather[0].description.slice(1),
+            city: data.timezone,
+            currentTime: dateFormat(data.current.dt),
+            currentTemp: `${Math.floor(data.current.temp)}°`,
+            firstTwelve
+        }
+
+        storage.push(store);
+        
+
+        // update localstorage content
+        // let local = localStorage.getItem('data');
+
+        if (local === null) {
+            localStorage.setItem('data', JSON.stringify(storage))
+        }
+        else {
+            // let oldLocal = JSON.parse(local);
+            let newLocal = oldLocal;
+            newLocal.push(store);
+            localStorage.setItem('data', JSON.stringify(newLocal))
+        }
+
+
+    }
+    catch (e) {
+        console.error(e)
+    }
+
+};
+
+// Get weather data on page load
+getWeather();
+
+
 let dataHistory = localStorage.getItem('data');
 let history = JSON.parse(dataHistory);
 // data history
@@ -241,6 +218,34 @@ function weatherHistory() {
 
 weatherHistory();
 
+// for history details
+function singleDetail(history, id) {
+    const singleData = history.filter(data => data.id == id);
+
+    singleData[0].firstTwelve.forEach(hourly => {
+
+        const url = `https://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
+        const temp = Math.floor(hourly.temp);
+        // day and date
+        const dateTime = dateFormat(hourly.dt);
+
+
+        historyDetailsDiv.innerHTML += `
+                <div class="content">
+                    <p>
+                        <span>${dateTime.time}</span>
+                        <span>${dateTime.date}</span>
+                    </p>
+                    <p>
+                        <span><img src=${url} alt="weather icon" width="30%"></span>
+                        <span>${hourly.weather[0].description} ${temp}°</span>
+                    </p>
+                </div>
+            `
+    })
+}
+
+
 
 function dataDetails(id) {
     // divs
@@ -254,16 +259,11 @@ function dataDetails(id) {
 }
 
 
-
-
 // GET A LOCATION LATITUDE AND LONGITUDE
-async function latLng(location) {
-    if (!location) {
-        return undefined
-    }
+async function latLng() {
 
     try {
-        const response = await fetch(`https://google-maps-geocoding.p.rapidapi.com/geocode/json?language=en&address=${location}`, {
+        const response = await fetch(`https://google-maps-geocoding.p.rapidapi.com/geocode/json?language=en&address=${input.value}`, {
             method: 'GET',
             headers: {
                 "x-rapidapi-host": "google-maps-geocoding.p.rapidapi.com",
@@ -278,7 +278,7 @@ async function latLng(location) {
 
 
         lat = data.results[0].geometry.location.lat,
-            lng = data.results[0].geometry.location.lng
+        lng = data.results[0].geometry.location.lng
         console.log('lat', lat);
         console.log('lng', lng)
     }
@@ -287,13 +287,17 @@ async function latLng(location) {
     };
 }
 
+// get weather by loaction trigger
+input.addEventListener('input', debounce(latLng, 500));
+
 // debounce
-// function debounce(func, wait = 10000) {
-//     let timeout;
-//     return function(...args) {
-//       clearTimeout(timeout);
-//       timeout = setTimeout(() => {
-//         func.apply(this, args);
-//       }, wait);
-//     };
-//   }
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+          console.log(this)
+        func.apply(this, args);
+      }, wait);
+    };
+  }
