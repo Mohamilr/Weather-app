@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
         content="'Smash It' outdoor events will be hosted in NYC in the coming months. This weather app information will be a determinant if the event will hold or not.">
-    <title>Weather-app</title>
+    <title>Weather-app - offline page</title>
     <!-- web app manifest -->
     <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32x32.png">
@@ -30,31 +30,16 @@
     <main>
         <section class="container">
             <section class="left-column">
-                <div class="top">
-                    <div class="search-div">
-                        <input type="text" placeholder="Location" class="search-input" onblur=latLng(this.value)>
-                        <span class="search-btn" onclick=getWeather()><i class="fas fa-search-location"></i></span>
-                    </div>
-                    <p class="current-weather"></p>
-                    <p class="city"></p>
-                    <img class="img" src="" alt="weather-icon" width="30%">
-                    <p class="current-temp"></p>
-                </div>
                 <div class="bottom">
                     <div class="bottom-list">
                         <ul>
-                            <li id="weather-nav" class="active">Current Weather</li>
                             <li class="back"><i class="fas fa-arrow-left"></i></li>
-                            <li id="history-nav">Search History</li>
+                            <li id="history-nav" class="active">Search History</li>
                         </ul>
-                    </div>
-                    <!-- weather -->
-                    <div class="weather">
-                        <p class="loader"><i class="fas fa-spinner fa-pulse"></i></p>
                     </div>
                     <!-- history -->
                     <div class="history">
-                        <img class="no-data" src="./images/empty.png" alt="no data">
+                        <img class="no-data" src="./empty.png" alt="no data">
                     </div>
                     <!-- history details -->
                     <div class="history-details">
@@ -63,23 +48,7 @@
             </section>
         </section>
     </main>
-    <script>
-        if (navigator.serviceWorker) {
-            try {
-                window.addEventListener('load', async () => {
-                    const register = await navigator.serviceWorker.register('./index.sw.js');
-                    console.log('registration', register.scope)
-                    console.log('register')
-                });
-            }
-            catch (e) {
-                console.error(e);
-            }
-
-        }
-    </script>
-    <script src="./js/controlElements.js"></script>
-    <script src="./index.sw.js"></script>
+    <script src="./js/offline.js"></script>
 </body>
 
 </html>

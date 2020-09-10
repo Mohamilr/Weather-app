@@ -20,9 +20,15 @@ const cacheItems = [
     './js/controlElements.js',
     './index.sw.js',
     // images
-    './empty.png',
-    './newyork.png',
-]
+    './images/empty.png',
+    './images/newyork.jpg',
+    './images/404.png',
+    // offline page
+    './offline.html',
+    './js/offline.js',
+    // 404 page
+    './404.html'
+];
 
 // install service worker
 self.addEventListener('install', installer => {
@@ -52,11 +58,12 @@ self.addEventListener('fetch', fetchEvent => {
             response = await fetch(request);
             if (response && response.status === 404) {
                 console.log('not available there');
-                // return response;
+                return caches.match('/404.html');
             }
         }
         catch (e) {
             console.error(e);
+            return caches.match('/offline.html');
         }
 
         const clone = response.clone();
