@@ -26,7 +26,7 @@ function singleDetail(history, id) {
 
     singleData[0].firstTwelve.forEach(hourly => {
 
-        const url = `http://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
+        const url = `https://openweathermap.org/img/wn/${hourly.weather[0].icon}@2x.png`;
         const temp = Math.floor(hourly.temp);
         // day and date
         const dateTime = dateFormat(hourly.dt);

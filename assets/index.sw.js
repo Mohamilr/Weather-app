@@ -22,12 +22,12 @@ const cacheItems = [
     // images
     './images/empty.png',
     './images/newyork.jpg',
+    './images/404.png',
     // offline page
     './offline.html',
     './js/offline.js',
     // 404 page
-    './404.html',
-    './images/404.png'
+    './404.html'
 ];
 
 // install service worker
@@ -58,12 +58,12 @@ self.addEventListener('fetch', fetchEvent => {
             response = await fetch(request);
             if (response && response.status === 404) {
                 console.log('not available there');
-                return caches.match('/assets/404.html');
+                return caches.match('/404.html');
             }
         }
         catch (e) {
             console.error(e);
-            return caches.match('/assets/offline.html');
+            return caches.match('/offline.html');
         }
 
         const clone = response.clone();
